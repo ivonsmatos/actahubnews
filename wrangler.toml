@@ -24,8 +24,8 @@ compatibility_flags = ["nodejs_compat"]
 # Build Configuration
 # ============================================
 [build]
-command = "npm run build"
-upload_dir = ".next"
+command = "npx @cloudflare/next-on-pages@1"
+upload_dir = ".vercel/output/static"
 
 # ============================================
 # Redirects (HTTP -> HTTPS, www -> non-www)

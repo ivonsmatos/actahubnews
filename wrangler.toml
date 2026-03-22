@@ -1,0 +1,69 @@
+# ============================================
+# Actahub - Cloudflare Pages Configuration
+# ============================================
+name = "actahubnews"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ============================================
+# Custom Domain
+# ============================================
+# Configure in Cloudflare Dashboard:
+# 1. Go to Pages > actahubnews > Custom domains
+# 2. Add actahub.com.br and www.actahub.com.br
+# 3. Cloudflare will auto-provision SSL (Full Strict)
+
+# ============================================
+# Environment Variables (set in CF Dashboard)
+# ============================================
+# NEXT_PUBLIC_SANITY_PROJECT_ID = "your-project-id"
+# NEXT_PUBLIC_SANITY_DATASET = "production"
+# NEXT_PUBLIC_SITE_URL = "https://actahub.com.br"
+
+# ============================================
+# Build Configuration
+# ============================================
+[build]
+command = "npm run build"
+upload_dir = ".next"
+
+# ============================================
+# Redirects (HTTP -> HTTPS, www -> non-www)
+# ============================================
+# These are best configured via Cloudflare Dashboard:
+# 1. SSL/TLS > Edge Certificates > Always Use HTTPS: ON
+# 2. Rules > Page Rules:
+#    - www.actahub.com.br/* -> https://actahub.com.br/$1 (301)
+
+# ============================================
+# WAF & Security Rules
+# ============================================
+# Configure in Cloudflare Dashboard > Security > WAF:
+# 
+# Recommended WAF Rules:
+# 1. Cloudflare Managed Ruleset: ENABLED
+# 2. OWASP ModSecurity Core Rule Set: ENABLED
+# 3. Custom Rules:
+#    - Block requests with SQL injection patterns
+#    - Block requests with XSS patterns
+#    - Rate limit: 100 requests/10s per IP
+#    - Challenge suspicious bot traffic
+#
+# Bot Management:
+# 1. Security > Bots > Bot Fight Mode: ON
+# 2. Allow verified bots (Googlebot, Bingbot, etc.)
+# 3. Challenge unverified bots
+
+# ============================================
+# Caching & Performance
+# ============================================
+# Configure in Cloudflare Dashboard:
+# 1. Caching > Configuration > Caching Level: Standard
+# 2. Speed > Optimization:
+#    - Auto Minify: JS, CSS, HTML
+#    - Brotli Compression: ON
+#    - Early Hints: ON
+#    - Rocket Loader: OFF (conflicts with Next.js)
+# 3. Caching > Cache Rules:
+#    - Cache static assets (/_next/static/*) for 1 year
+#    - Cache images for 30 days

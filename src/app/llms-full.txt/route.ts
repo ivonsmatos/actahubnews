@@ -3,6 +3,9 @@ import { sanityClient } from "@/lib/sanity/client";
 import { articlesForLLMQuery } from "@/lib/sanity/queries";
 import type { ArticleForLLM } from "@/lib/sanity/types";
 
+// Required for Cloudflare Pages (next-on-pages)
+export const runtime = "edge";
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://actahub.com.br";
 
 /**

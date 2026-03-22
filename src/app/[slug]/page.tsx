@@ -6,6 +6,9 @@ import type { Article, ArticleSlug } from "@/lib/sanity/types";
 import ArticleRenderer from "@/components/ArticleRenderer";
 import JsonLd from "@/components/JsonLd";
 
+// Required for Cloudflare Pages (next-on-pages)
+export const runtime = "edge";
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://actahub.com.br";
 
 interface PageProps {

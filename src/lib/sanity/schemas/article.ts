@@ -39,6 +39,14 @@ const article = defineType({
       group: "content",
     }),
     defineField({
+      name: "category",
+      title: "Categoria",
+      type: "reference",
+      to: [{ type: "category" }],
+      group: "content",
+      description: "Categoria principal do artigo (define cor e ícone na interface).",
+    }),
+    defineField({
       name: "publishedAt",
       title: "Data de Publicação",
       type: "datetime",

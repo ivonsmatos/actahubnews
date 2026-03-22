@@ -2,6 +2,7 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import article from "./src/lib/sanity/schemas/article";
+import category from "./src/lib/sanity/schemas/category";
 
 export default defineConfig({
   name: "actahub",
@@ -14,6 +15,6 @@ export default defineConfig({
     visionTool(), // opcional — permite testar GROQ queries
   ],
   schema: {
-    types: [article],
+    types: [category, article],
   },
 });

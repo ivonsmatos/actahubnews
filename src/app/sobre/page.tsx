@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Sobre o Actahub | Autoridade em Tecnologia, Saúde e Conhecimento",
@@ -30,17 +29,24 @@ export default function SobrePage() {
     },
   ];
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <>
-      {/* JSON-LD Schemas for GEO */}
-      <JsonLd
-        type="FAQPage"
-        data={{
-          title: "Perguntas Frequentes - Sobre o Actahub",
-          slug: "sobre",
-          faq: faqs,
-        }}
-        url="https://actahub.com.br/sobre"
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       
       {/* Hidden AI Summary & Entities for LLM crawlers */}

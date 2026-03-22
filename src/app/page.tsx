@@ -3,8 +3,8 @@ import { sanityClient } from "@/lib/sanity/client";
 import { allArticlesQuery } from "@/lib/sanity/queries";
 import type { ArticleListItem } from "@/lib/sanity/types";
 
-export const revalidate = 3600; // ISR: rebuild every hour
-
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
 export default async function HomePage() {
   let articles: ArticleListItem[] = [];
 

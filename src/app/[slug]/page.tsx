@@ -8,21 +8,12 @@ import JsonLd from "@/components/JsonLd";
 
 // Required for Cloudflare Pages (next-on-pages)
 export const runtime = "edge";
+export const dynamic = "force-dynamic";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://actahub.com.br";
 
 interface PageProps {
   params: { slug: string };
-}
-
-// ── Static Params (SSG) ─────────────────────────
-export async function generateStaticParams() {
-  try {
-    const slugs: ArticleSlug[] = await sanityClient.fetch(allArticleSlugsQuery);
-    return slugs.map((s) => ({ slug: s.slug }));
-  } catch {
-    return [];
-  }
 }
 
 // ── Dynamic Metadata (SEO + OG + hreflang) ──────

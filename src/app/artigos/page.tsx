@@ -4,8 +4,8 @@ import { allArticlesQuery } from "@/lib/sanity/queries";
 import type { Metadata } from "next";
 import type { ArticleListItem } from "@/lib/sanity/types";
 
-export const revalidate = 60; // Revalidar a cada 60 segundos
-
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Artigos",
   description:
